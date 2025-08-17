@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Typed.js Example</title>
+<style>
+  body {
+    background: #111;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  #typed-text {
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    max-width: 500px;
+    white-space: pre-line; /* برای خط جدید */
+  }
+</style>
+</head>
+<body>
+
+<div id="typed-text"></div>
+
+<!-- لینک کتابخانه Typed.js -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+  const options = {
+    strings: [
+      "Life is poison,\nand music is the antidote.\nAlways with you."
+    ],
+    typeSpeed: 50,
+    backSpeed: 0,
+    showCursor: true,
+    cursorChar: '|',
+    autoInsertCss: true,
+  };
+
+  const typed = new Typed('#typed-text', options);
+</script>
+
+</body>
+</html>

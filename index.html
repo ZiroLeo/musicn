@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Music Gallery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  
+ <!-- Header -->
+<header class="header">
+  <!-- Hamburger -->
+  <button class="hamburger" onclick="toggleMenu()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+      stroke-width="1.5" stroke="currentColor" width="28" height="28">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>
+  </button>
+
+  <!-- Profile -->
+  <a href="profile.html" class="profile-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+      <path fill-rule="evenodd"
+        d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+        clip-rule="evenodd" />
+    </svg>
+  </a>
+</header>
+
+<!-- Side Menu -->
+<div id="sideMenu" class="side-menu">
+  <a href="#">Home</a>
+
+  <div class="dropdown">
+    <a href="#">Musics ↓</a>
+    <div class="dropdown-content">
+      <a href="#">New</a>
+      <a href="#">Top This week</a>
+      <a href="#">For you</a>
+    </div>
+  </div>
+
+  <a href="#">Playlists</a>
+  <a href="#">Artists</a>
+  <a href="#">About</a>
+  <a href="#">Ads</a>
+
+  <hr>
+
+  <a href="#">Saved</a>
+  <a href="#">Liked</a>
+  <a href="#">Favorites</a>
+
+  <hr>
+  <p class="copyright">© All rights reserved.</p>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+<!-- Banner Section -->
+<div class="banner">
+  <img src="Headerpic.jpg" alt="Banner">
+  <div class="banner-text">Life is toxic, and music is the antidote</div>
+</div>
+    <!-- Search -->
+<div class="search-container" style="display: flex; justify-content: center; padding: 20px;">
+  <div class="search-box" style="
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+  ">
+    <input id="searchInput" type="text" placeholder="Search..." style="
+      width: 100%;
+      padding: 12px 40px 12px 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #222;
+      color: #fff;
+      font-size: 14px;
+      box-sizing: border-box;
+    ">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      pointer-events: none;
+    ">
+      <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
+    </svg>
+  </div>
+</div>
+<style>
+  .section-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ccc;
+  margin: 20px 16px 8px;
+  position: relative;
+  display: inline-block;
+  font-family: sans-serif;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 3px;
+  width: 40px;
+  background: linear-gradient(90deg, #04CCFF, #3562A5);
+  border-radius: 2px;
+}
+
+/* نوار آرتیست‌ها */
+.singer-bar {
+  position: relative;
+  display: flex;
+  overflow-x: auto;
+  padding: 10px 12px 16px;
+  gap: 14px;
+  scrollbar-width: none; /* برای فایرفاکس */
+  background: transparent;
+}
+
+.singer-bar::-webkit-scrollbar {
+  display: none; /* برای کروم */
+}
+
+/* آیکون خواننده به صورت دایره با بوردر گرادیان */
+.singer-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  padding: 2px;
+ 
+  box-shadow: 0 0 5px rgba(255,255,255,0.1), 0 0 8px rgba(0,0,0,0.3);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.singer-icon:hover {
+  transform: scale(1.08);
+}
+
+/* خود تصویر داخل دایره */
+.singer-icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #000;
+  display: block;
+}
+.singer-wrapper {
+  position: relative;
+}
+
+.artist-fade-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 95%;
+  width: 80%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255, 255, 255, 0.096) 50%, rgba(255, 255, 255, 0.408) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.show-more-btn {
+  background: #fff;
+  color: #000;
+  margin-left: auto;
+  margin-right: 13px;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 8px 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  pointer-events: auto;
+  z-index: 3;
+}
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.singer-icon {
+  opacity: 0;
+  animation: slideInRight 0.4s forwards;
+}
+.artist-strip {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background: #000; /* یا هر رنگی خواستی */
+  padding: 20px 0;
+}
+
+.artist-track {
+  display: flex;
+  gap: 24px;
+  animation: scrollLeft 20s linear infinite;
+}
+
+.artist-track img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+  
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+</style>
+<h2 class="section-title">Artists</h2>
+<div class="singer-wrapper">
+  <div class="singer-bar">
+    <a class="singer-icon" href="#"><img src="./Artists/mehyadicon.jpg" alt="Mehyad"></a>
+    <a class="singer-icon" href="#"><img src="./Artists/Amintij.jpg" alt="Tijay"></a>
+    <a class="singer-icon" href="#"><img src="./Artists/sajadShahi.webp" alt="Shahi"></a>
+    <a class="singer-icon" href="#"><img src="./Artists/DaLu.webp" alt="DaLu"></a>
+    <a class="singer-icon" href="#"><img src="./Artists/hiphopologist.webp" alt="hiphopologist"></a>
+    <a class="singer-icon" href="#"><img src="./Artists/matinFattahi.jpg" alt="2tt"></a>
+    <a class="singer-icon" href="#"><img src="./Artists/poboon.jpg" alt="Poboon"></a>
+    <a class="singer-icon" href="#"><img src="./Artists/arta.jpg" alt="Poboon"></a>
+    <a class="singer-icon" href="#"><img src="./Artists/hosseinTiem.jpg" alt="Poboon"></a>
+    
+    <!-- بقیه... -->
+     
+  </div>
+
+  <div class="artist-fade-box">
+    <a href="Artists.html" class="show-more-btn">
+      Show Artists
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 20px; height: 20px;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+    </a>
+  </div>
+</div>
+<!-- NEW -->
+<section class="track-section">
+  <h2>  New</h2>
+  <div class="grid-container">
+    <div class="track-card">
+      <div class="cover" style="background-image: url('Covers/cover1.jpg');"></div>
+      <div class="info">
+        <div class="track-name">Cheshat migad</div>
+        <div class="artist-name">Mehyad</div>
+      </div>
+    </div>
+    <div class="track-card">
+      <div class="cover" style="background-image: url('Covers/cover2.jpg');"></div>
+      <div class="info">
+        <div class="track-name">Delam az donya</div>
+        <div class="artist-name">Homman</div>
+      </div>
+    </div>
+    <div class="track-card">
+      <div class="cover" style="background-image: url('Covers/cover2.jpg');"></div>
+      <div class="info">
+        <div class="track-name">Delam az donya</div>
+        <div class="artist-name">Homman</div>
+      </div>
+    </div>
+  </div>
+</section>
+  
+
+<!-- Top This Week -->
+<section class="track-section">
+  <h2>  Top This Week</h2>
+  <div class="grid-container">
+    <div class="track-card">
+      <div class="cover" style="background-image: url('Covers/cover3.jpg');"></div>
+      <div class="info">
+        <div class="track-name">XX</div>
+        <div class="artist-name">Ali Gramy & Shahi</div>
+      </div>
+    </div>
+    <div class="track-card">
+      <div class="cover" style="background-image: url('Covers/cover4.jpg');"></div>
+      <div class="info">
+        <div class="track-name">Qol</div>
+        <div class="artist-name">Chevrsi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+ <!-- Hot -->
+<section class="track-section">
+  <h2>  Hot</h2>
+  <div class="grid-container">
+    <div class="track-card">
+      <div class="cover" style="background-image: url('Covers/cover1.jpg');"></div>
+      <div class="info">
+        <div class="track-name">Cheshat migad</div>
+        <div class="artist-name">Mehyad</div>
+      </div>
+    </div>
+    <div class="track-card">
+      <div class="cover" style="background-image: url('Covers/cover2.jpg');"></div>
+      <div class="info">
+        <div class="track-name">Delam az donya</div>
+        <div class="artist-name">Homman</div>
+      </div>
+    </div>
+    <div class="track-card">
+      <div class="cover" style="background-image: url('Covers/cover2.jpg');"></div>
+      <div class="info">
+        <div class="track-name">Delam az donya</div>
+        <div class="artist-name">Homman</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- For You -->
+<section class="track-section">
+  <h2>  For You</h2>
+  <div class="grid-container">
+    <div class="track-card">
+      <div class="cover" style="background-image: url('Covers/cover5.jpg');"></div>
+      <div class="info">
+        <div class="track-name">Bitch</div>
+        <div class="artist-name">Hesam Tiem</div>
+      </div>
+    </div>
+    <div class="track-card">
+      <a href="Pages/music.html" class="track-link">
+        <div class="cover" style="background-image: url('Covers/cover6.jpg');"></div>
+        <div class="info">
+          <div class="track-name">Cheshat</div>
+          <div class="artist-name">Parhum</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+    
+<section class="other-section">
+  <h2>Other Tracks</h2>
+  <div class="other-row">
+    <div class="track-card">
+      <div class="cover" style="background-image: url('Covers/cover1.jpg');"></div>
+      <div class="info">
+        <div class="track-name">Track 1</div>
+        <div class="artist-name">Artist A</div>
+      </div>
+    </div>
+    <div class="track-card">
+      <div class="cover" style="background-image: url('Covers/cover5.jpg');"></div>
+      <div class="info">
+        <div class="track-name">Track 2</div>
+        <div class="artist-name">Artist B</div>
+      </div>
+    </div>
+    <div class="track-card">
+      <div class="cover" style="background-image: url('Covers/cover3.jpg');"></div>
+      <div class="info">
+        <div class="track-name">Track 1</div>
+        <div class="artist-name">Artist A</div>
+      </div>
+    </div>
+    <div class="track-card">
+      <div class="cover" style="background-image: url('Covers/cover2.jpg');"></div>
+      <div class="info">
+        <div class="track-name">Track 2</div>
+        <div class="artist-name">Artist B</div>
+      </div>
+    </div>
+    <!-- می‌تونی کاورهای دیگه هم همینجا اضافه کنی -->
+  </div>
+</section>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('sideMenu').classList.toggle('active');
+    }
+  </script>
+
+  
+  <!-- Example Songs Data + Search Script -->
+  <script>
+    const songs = [
+      { title: "غمگین ترین آهنگ", artist: "آرتیست A" },
+      { title: "شاد شاد", artist: "آرتیست B" },
+      { title: "آهنگ عاشقانه", artist: "آرتیست C" },
+      { title: "غمگین دوم", artist: "آرتیست A" },
+    ];
+
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", function () {
+      const query = this.value.toLowerCase();
+      const filtered = songs.filter(song =>
+        song.title.toLowerCase().includes(query) ||
+        song.artist.toLowerCase().includes(query)
+      );
+      console.log("نتایج سرچ:", filtered);
+      // اینجا می‌تونی نمایش آهنگ‌ها رو بروزرسانی کنی
+    });
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const bar = document.querySelector('.singer-bar');
+    const children = Array.from(bar.children);
+
+    // الگوریتم شافل (Fisher-Yates)
+    for (let i = children.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [children[i], children[j]] = [children[j], children[i]];
+    }
+
+    // پاک کردن و چسبوندن دوباره
+    bar.innerHTML = '';
+    children.forEach(child => bar.appendChild(child));
+  });
+
+ 
+  </script>
+
+</html>

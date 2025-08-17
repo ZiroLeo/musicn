@@ -1,0 +1,446 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #111111;
+    color: #fff;
+  }
+
+  /* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #222;
+  z-index: 1000;
+}
+
+  .menu-icon,
+  .profile-icon {
+    cursor: pointer;
+    font-size: 22px;
+  }
+
+  /* Side Menu (from left) */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    padding: 20px;
+    transition: 0.3s;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+    z-index: 200;
+  }
+
+  .side-menu.active {
+    left: 0;
+  }
+
+  .side-menu a {
+    display: block;
+    color: #fff;
+    padding: 10px 0;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+  }
+
+  /* Grid Container */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .track-card {
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .track-card:hover {
+    transform: scale(1.03);
+  }
+
+  .cover {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: #555;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .info {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .track-name {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .artist-name {
+    font-size: 12px;
+    color: #aaa;
+  }
+  .main-banner {
+position: relative;
+width: 100%;
+height: 300px; /* ارتفاع بنر در دسکتاپ */
+overflow: hidden;
+border-radius: 0 0 12px 12px; /* گوشه‌های گرد پایین دلخواه */
+}
+
+/* تصویر داخل بنر */
+.main-banner img {
+width: 100%;
+height: 100%;
+object-fit: cover; /* تناسب تصویر */
+display: block;
+filter: brightness(0.9); /* کمی تیره برای خوانایی محتوا */
+transition: transform 0.3s ease; /* افکت زوم هنگام هاور */
+}
+
+/* افکت هاور */
+.main-banner:hover img {
+transform: scale(1.05);
+}
+
+/* افکت محو پایین تصویر */
+.main-banner::after {
+content: "";
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 100px;
+background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+pointer-events: none;
+}
+
+/* واکنش‌گرایی موبایل */
+@media (max-width: 768px) {
+.main-banner {
+  height: 200px;
+}
+}
+.track-link {
+text-decoration: none; /* حذف خط زیر لینک */
+color: inherit;        /* رنگ متن مثل بقیه */
+display: block;        /* کل کارت کلیک‌پذیر بشه */
+}
+.header-link {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 0;
+margin: 0;
+border: none;
+background: none;
+text-decoration: none;
+color: inherit;
+cursor: pointer;
+-webkit-tap-highlight-color: transparent; /* حذف هایلایت آبی موبایل */
+}
+
+.header-link:focus {
+outline: none;
+box-shadow: none;
+}
+
+.header-link:active,
+.header-link:visited,
+.header-link:hover {
+color: inherit; /* رنگ ثابت */
+text-decoration: none; /* خط زیر پاک */
+}
+.grid-container {
+display: flex;
+overflow-x: auto;
+gap: 16px;
+padding: 16px;
+scroll-snap-type: x mandatory; /* اسکرول اسنپ */
+}
+
+.track-card {
+flex: 0 0 auto;
+width: 150px;
+background-color: #222;
+border-radius: 12px;
+overflow: hidden;
+cursor: pointer;
+scroll-snap-align: start;
+transition: transform 0.2s ease;
+}
+
+.track-card:hover {
+transform: scale(1.05);
+}
+
+.cover {
+width: 100%;
+height: 150px;
+background-size: cover;
+background-position: center;
+}
+
+.info {
+padding: 8px;
+text-align: center;
+}
+
+.track-name {
+font-size: 14px;
+color: #fff;
+font-weight: bold;
+margin-bottom: 4px;
+}
+
+.artist-name {
+font-size: 12px;
+color: #aaa;
+}
+
+.track-link {
+text-decoration: none;
+}
+.track-section h2 {
+font-size: 20px;
+font-weight: 700;
+color: #ffffff;
+margin: 20px 16px 10px;
+position: relative;
+display: inline-block;
+padding-bottom: 6px;
+font-family: sans-serif;
+}
+
+.track-section h2::after {
+content: '';
+position: absolute;
+left: 0;
+bottom: 0;
+height: 3px;
+width: 40px;
+background: linear-gradient(90deg, #04CCFF, #3562A5);
+border-radius: 2px;
+}
+header a svg {
+color: #ffffff;   /* برای fill="currentColor" */
+fill: #ffffff;    /* برای fill مستقیم */
+stroke: #ffffff;  /* برای stroke مستقیم */
+}
+
+/* حالت فوکوس یا فعال (برای جلوگیری از آبی شدن) */
+header a:focus svg,
+header a:active svg,
+header a:focus-visible svg {
+color: #ffffff;
+fill: #ffffff;
+stroke: #ffffff;
+}
+
+/* حذف حاشیه فوکوس */
+header a {
+outline: none;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #1e1e1e;
+  }
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+  }
+  .search-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  .search-box {
+    position: relative;
+    width: 60%;
+    max-width: 300px;
+  }
+  .search-box input {
+    width: 100%;
+    padding: 8px 35px 8px 12px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+  }
+  .search-box svg {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: #888;
+  }
+  .player {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .other-section {
+    padding: 0 16px 40px;
+  }
+  
+  .other-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 20px 0 10px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 6px;
+    font-family: sans-serif;
+  }
+  
+  .other-section h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 40px;
+    background: linear-gradient(90deg, #04CCFF, #3562A5);
+    border-radius: 2px;
+  }
+  
+  .other-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+  .other-row .track-card {
+    width: 160px;             /* تا جای ممکن بزرگ بشه تو ستون خودش */
+    max-width: 220px;        /* حداکثر عرض بیشتر از پیش‌فرض بشه */
+  }
+  
+  .other-row .cover {
+    height: 160px;           /* کاور رو بلندتر کن */
+  }
+  .banner {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 230px; /* می‌تونی تغییر بدی */
+    overflow: hidden;
+  }
+  
+  .banner img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 25px 25px;
+    transition: transform 0.4s ease;
+  }
+  
+  
+
+ 
+  .banner-text {
+    position: absolute;
+    top: 60%;
+    left: 36%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: left;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+  }
+ 
+  /* Hamburger Button */
+  .hamburger {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: white;
+  }
+  
+  /* Profile Button */
+  .profile-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+  }
+  
+  /* Side Menu */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #181818;
+    padding: 1px;
+    overflow-y: auto;
+    transition: left 0.3s ease;
+    z-index: 1001;
+  }
+  
+  .side-menu a {
+    display: block;
+    color: white;
+    padding: 10px 0;
+    text-decoration: none;
+  }
+  
+  .side-menu a:hover {
+    background: #333;
+  }
+  
+  .side-menu hr {
+    border: 0;
+    border-top: 1px solid #555;
+    margin: 15px 0;
+  }
+  
+  .copyright {
+    font-size: 12px;
+    color: #bbb;
+  }
+  
+  /* Dropdown */
+  .dropdown-content {
+    display: none;
+    padding-left: 15px;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Overlay */
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+  }

@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artist Sections</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #111111;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+    }.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ccc;
+  margin: 20px 16px 8px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 3px;
+  width: 40px;
+  background: linear-gradient(90deg, #04CCFF, #3562A5);
+  border-radius: 2px;
+}
+
+.singer-bar {
+  display: flex;
+  overflow-x: auto;
+  padding: 16px;
+  gap: 10px; /* فاصله کمتر */
+  scrollbar-width: none;
+}
+.singer-bar::-webkit-scrollbar {
+  display: none;
+}
+.singer-card {
+  flex-shrink: 0;
+  text-align: center;
+  width: 100px; /* بزرگ‌تر شد */
+  animation: slideInRight 0.5s ease forwards;
+}
+
+.singer-img {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  padding: px;
+  border: 2px solid transparent;
+
+  box-shadow: 0 0 7px rgba(255,255,255,0.1), 0 0 8px rgba(0,0,0,0.3);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.singer-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.singer-name {
+  font-size: 14px;
+  color: #ccc;
+  margin-top: 8px;
+  text-align: center; /* وسط‌چین شد */
+}
+.top-bar {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 30px;
+  padding: 30px 0 10px;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+  </style>
+</head>
+<body>
+  <h2 class="section-title">Top</h2>
+  <div class="top-bar">
+    <div class="singer-card top2">
+      <div class="singer-img"><img src="./Artists/Amintij.jpg" alt="Tijay"></div>
+      <div class="singer-name">Tijay</div>
+    </div>
+    <div class="singer-card top1">
+      <div class="singer-img"><img src="./Artists/mehyadicon.jpg" alt="Mehyad"></div>
+      <div class="singer-name">Mehyad</div>
+    </div>
+    <div class="singer-card top3">
+      <div class="singer-img"><img src="./Artists/sajadShahi.webp" alt="Shahi"></div>
+      <div class="singer-name">Shahi</div>
+    </div>
+  </div>  <h2 class="section-title">Dep side</h2>
+  <div class="singer-bar">
+    <div class="singer-card top3">
+      <div class="singer-img"><img src="./Artists/sajadShahi.webp" alt="Shahi"></div>
+      <div class="singer-name">Shahi</div>
+    </div>
+    <div class="singer-card">
+      <div class="singer-img"><img src="./Artists/DaLu.webp" alt="DaLu"></div>
+      <div class="singer-name">DaLu</div>
+    </div>
+    <div class="singer-card">
+      <div class="singer-img"><img src="./Artists/hiphopologist.webp" alt="hiphopologist"></div>
+      <div class="singer-name">hiphopologist</div>
+    </div>
+    <div class="singer-card">
+      <div class="singer-img"><img src="./Artists/matinFattahi.jpg" alt="2tt"></div>
+      <div class="singer-name">2tt</div>
+    </div>
+  </div>  <h2 class="section-title">Loop!</h2>
+  <div class="singer-bar">
+    <div class="singer-card">
+      <div class="singer-img"><img src="./Artists/poboon.jpg" alt="Poboon"></div>
+      <div class="singer-name">Poboon</div>
+    </div>
+    <div class="singer-card">
+      <div class="singer-img"><img src="./Artists/arta.jpg" alt="Arta"></div>
+      <div class="singer-name">Arta</div>
+    </div>
+    <div class="singer-card">
+      <div class="singer-img"><img src="./Artists/hosseinTiem.jpg" alt="Tiem"></div>
+      <div class="singer-name">Tiem</div>
+    </div>
+  </div>
+  <script>
+     document.addEventListener('DOMContentLoaded', () => {
+    const bar = document.querySelector('.singer-bar');
+    const children = Array.from(bar.children);
+
+    // الگوریتم شافل (Fisher-Yates)
+    for (let i = children.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [children[i], children[j]] = [children[j], children[i]];
+    }
+
+    // پاک کردن و چسبوندن دوباره
+    bar.innerHTML = '';
+    children.forEach(child => bar.appendChild(child));
+  });
+  </script>
+</body>
+</html>

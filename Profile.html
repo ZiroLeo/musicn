@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+  <div class="profile-container">
+    <!-- دایره زمان گوش دادن -->
+    <div class="listening-time">
+      <div class="circle">
+        <div class="time-text">
+          12h 30m
+        </div>
+      </div>
+      <div class="songs-count">
+        You listened to 345 songs
+      </div>
+    </div>
+
+    <!-- پلی‌لیست موردعلاقه‌ها -->
+    <div class="favorites-section">
+      <button class="favorites-button">
+        ⭐ Your Playlist
+      </button>
+      <div class="favorites-list" id="favoritesList">
+        <!-- اینجا موزیک‌های ستاره‌دار با جاوااسکریپت اضافه می‌شن -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // دمو: وقتی روی دکمه پلی‌لیست کلیک می‌کنی، آهنگ‌های مورد علاقه نشون داده میشه
+    const btn = document.querySelector(".favorites-button");
+    const list = document.getElementById("favoritesList");
+    btn.addEventListener("click", () => {
+      list.innerHTML = 
+        <ul>
+          <li>🎵 Song 1 - Artist A</li>
+          <li>🎵 Song 2 - Artist B</li>
+          <li>🎵 Song 3 - Artist C</li>
+        </ul>
+      ;
+    });
+  </script>
+</body>
+</html>

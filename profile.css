@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .profile-container {
+    text-align: center;
+  }
+  
+  .listening-time {
+    margin-bottom: 20px;
+  }
+  
+  .circle {
+    width: 150px;
+    height: 150px;
+    border: 5px solid #3562A5;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    margin: 0 auto;
+  }
+  
+  .time-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .songs-count {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .favorites-section {
+    margin-top: 30px;
+  }
+  
+  .favorites-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #3562A5;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  
+  .favorites-button:hover {
+    background: #2b4e86;
+  }
+  
+  .favorites-list {
+    margin-top: 15px;
+    text-align: left;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .favorites-list ul {
+    padding: 0;
+    list-style: none;
+  }
+  
+  .favorites-list li {
+    background: white;
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+  }
